@@ -1,0 +1,32 @@
+﻿    #div_Psw{
+   	position: absolute;
+   	left: 25px;
+   	top: 40px;
+   }
+   #div_Psw1{
+   	position: absolute;
+   	left: 25px;
+   	top: 40px;
+   }
+   
+   .sub{
+   	position: absolute;
+   	left: 25px;
+   	top: 120px;
+   }
+   #input_Psw1{
+    display: none;
+   }
+   #notice{
+    position: absolute;
+    left: 275px;
+    top: 0px;
+    color: red;
+    font-size: smaller;
+   }
+   #div_Verify{
+    position: absolute;
+    left: 25px;
+    top: 80px;
+    display: inline;
+   }

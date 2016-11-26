@@ -1,0 +1,68 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<style>
+   #div_Psw{
+   	position: absolute;
+   	left: 25px;
+   	top: 40px;
+   }
+   #div_Psw1{
+   	position: absolute;
+   	left: 25px;
+   	top: 40px;
+   }
+   #input_Psw1{
+   	display: none;
+   }
+   .sub{
+   	position: absolute;
+   	left: 25px;
+   	top: 80px;
+   }
+</style>
+<script>
+var input_Psw1 = "input_Psw1";
+var input_Psw = "input_Psw";
+function disPlayPsw(){
+	document.getElementById(input_Psw1).style.display="inline";
+	document.getElementById(input_Psw).style.display="none";
+}
+function disPlayPswBack(){
+	var psw1 = document.getElementById(input_Psw1);
+	var psw = document.getElementById(input_Psw);
+	if(psw1.value == "")
+		psw1.style.display="none";
+	    psw.style.display="inline";
+}
+
+function ajaxTest(){
+  var obj = {
+        url: "https://api.douban.com/v2/book/1220562",              //请求地址
+        type: "GET",                       //请求方式
+        contentType: "application/jsonp",
+        dataType: "jsonp",
+        success: function (as) {
+            document.getElementById("return").innerHTML=as.title;
+            // 此处放成功后执行的代码
+        },
+        fail: function (status) {
+            // 此处放失败后执行的代码
+        }
+    };
+  $.ajax(obj);
+}
+</script>
+</head>
+<body>
+  <div>
+    <div>用户名：<input type="text" id="username" name="username" placeholder="请输入用户名"></div>
+     <div id="div_Psw" >密码：<input type="text" id="input_Psw" placeholder="请输入密码" onfocus="disPlayPsw();"/></div>
+     <div id="div_Psw1" >密码：<input type="password" id="input_Psw1" placeholder="" onblur="disPlayPswBack();" /></div>
+    
+    <div class="sub"><input type="button" value="提交" onclick="ajaxTest()">
+    </div>
+    <div><p id="return"></p></div>
+   </div>
+</body>
+</html>

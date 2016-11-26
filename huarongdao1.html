@@ -1,0 +1,95 @@
+<html>
+<head>
+	
+	<script>
+	onload = function() {
+	var src = new Array("1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg");
+	src.sort(function(a, b) {
+		return Math.random() - .5
+	});
+
+
+	document.getElementById("change").onclick = misaligned_Pic;
+	/*for (var i = 1; i < 9; i++) {
+		document.getElementById("pic"+i).onclick = function() {
+			judge_Position("pic"+i);
+		}
+	}*/
+	document.getElementById("pic1").onclick = function() {
+		judge_Position(pic1);
+	}
+	document.getElementById("pic2").onclick = function() {
+		judge_Position(pic2);
+	}
+	document.getElementById("pic3").onclick = function() {
+		judge_Position(pic3);
+	}
+	document.getElementById("pic4").onclick = function() {
+		judge_Position(pic4);
+	}
+	document.getElementById("pic5").onclick = function() {
+		judge_Position(pic5);
+	}
+	document.getElementById("pic6").onclick = function() {
+		judge_Position(pic6);
+	}
+	document.getElementById("pic7").onclick = function() {
+		judge_Position(pic7);
+	}
+	document.getElementById("pic8").onclick = function() {
+		judge_Position(pic8);
+	}
+
+	function misaligned_Pic() {
+		for (var i = 0; i < src.length; i++) {
+			document.getElementById("pic" + (i + 1)).src = src[i];
+		};
+	}
+
+
+
+	function judge_Position(num) {
+
+		var _num = num.getBoundingClientRect();
+		var _blank = blank.getBoundingClientRect();
+		if ((_num.left == _blank.left && Math.abs(_num.top - _blank.top) == 154) ||
+			(_num.top == _blank.top && Math.abs(_num.left - _blank.left) ==154))
+			change_position(num);
+		else alert("无法移动！")
+	}
+
+	function change_position(num) {
+		var x = document.getElementById(num.id);
+		var y = document.getElementById("blank");
+		var z = "";
+		var a = "";
+		z=x.style.top;
+		a=x.style.left;
+		document.getElementById(num.id).style.top = y.style.top;
+		document.getElementById("blank").style.top= z;
+		document.getElementById(num.id).style.left = y.style.left;
+		document.getElementById("blank").style.left= a;
+	}
+
+}
+
+	</script>
+
+
+</style>
+	
+</head>
+<body>
+
+	<img src="1.jpg" alt="1" id="pic1" style="position: absolute;left:0px;top:0px;"/>
+	<img src="2.jpg" alt="2" id="pic2"style="position: absolute;left:154px;top: 0px;"/>
+	<img src="3.jpg" alt="3" id="pic3"style="position: absolute;left:308px;top: 0px;"/>
+	<img src="4.jpg" alt="4" id="pic4"style="position: absolute;left:0px;top: 154px;"/>
+	<img src="5.jpg" alt="5" id="pic5"style="position: absolute;left:154px;top: 154px;"/>
+	<img src="6.jpg" alt="6" id="pic6" style="position: absolute;left:308px;top: 154px;"/>
+	<img src="7.jpg" alt="7" id="pic7"style="position: absolute;left:0px;top: 308px;"/>
+	<img src="8.jpg" alt="8" id="pic8" style="position: absolute;left:154px;top: 308px;"/>
+	<img src="blank.jpg"  alt="" id="blank" style="position: absolute;left:308px;top: 308px;"/>
+	<input type="button" id="change" value="开始游戏"/>
+</body>
+</html>

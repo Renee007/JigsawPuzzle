@@ -1,0 +1,63 @@
+﻿
+	#pic0{
+		position: absolute;
+		left:308px;
+		top: 308px;
+	}
+	#pic1{
+		position: absolute;
+		left:0px;
+		top: 0px;
+	}
+	#pic2{
+		position: absolute;
+		left:154px;
+		top: 0px;
+	}
+	#pic3{
+		position: absolute;
+		left:308px;
+		top: 0px;
+	}
+	#pic4{
+		position: absolute;
+		left:0px;
+		top: 154px;
+	}
+	#pic5{
+		position: absolute;
+		left:154px;
+		top: 154px;
+	}
+	#pic6{
+		position: absolute;
+		left:308px;
+		top: 154px;
+	}
+	#pic7{
+		position: absolute;
+		left:0px;
+		top: 308px;
+	}
+	#pic8{
+		position: absolute;
+		left:154px;
+		top: 308px;
+	}
+	
+	img[alt]{
+		width: 150px;
+		height: 150px;
+	}
+	#change{
+		position: absolute;
+		left:0px;
+		top: 500px;
+	}
+	#judge{
+		position: absolute;
+		left:100px;
+		top: 500px;
+	}
+
+
