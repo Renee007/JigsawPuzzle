@@ -41,6 +41,7 @@ onload = function() {
 			var PIC0Top = parseFloat(document.getElementById("pic0").style.top);
 			var NUMPLEFT = parseFloat(document.getElementById(num.id).style.left);
 			var PIC0LEFT = parseFloat(document.getElementById("pic0").style.left);
+			if (NUMPTop > PIC0Top) 
 			var sh;
 			sh = setInterval(change_position, 200, num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
 			setTimeout(clearInterval, 1000, sh);
@@ -52,14 +53,10 @@ onload = function() {
 	function change_position(num,NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT) {
 		var nump = document.getElementById(num.id);
 		var pic0 = document.getElementById("pic0");
-		// const NUMPTop=parseFloat(nump.style.top);
-		// const PIC0Top=parseFloat(pic0.style.top);
-		// const NUMPLEFT=parseFloat(nump.style.left);
-		// const PIC0LEFT=parseFloat(pic0.style.left);
 		const DISTANCE = 5;
 
 
-		if (nump.style.left == pic0.style.left) {
+		if (nump.style.left == pic0.style.left&&) {
 			if (NUMPTop > PIC0Top) {
 				nump.style.top = (parseFloat(nump.style.top) - 154 / DISTANCE) + "px";
 				pic0.style.top = (parseFloat(pic0.style.top) + 154 / DISTANCE) + "px";
