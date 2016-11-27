@@ -26,9 +26,9 @@ onload = function() {
 			judge_Position(e.currentTarget);
 		}
 	}
-	
+
 	document.getElementById("judge").onclick = judge_FinalPosition;
-	document.getElementById("change").mousedown = judge_Posibility;
+	document.getElementById("change").onclick = judge_Posibility;
 
 
 	//判断图片是否可以移动并移动
@@ -43,40 +43,23 @@ onload = function() {
 			var PIC0Top = parseFloat(document.getElementById("pic0").style.top);
 			var NUMPLEFT = parseFloat(document.getElementById(num.id).style.left);
 			var PIC0LEFT = parseFloat(document.getElementById("pic0").style.left);
+
 			if (nump.style.left == pic0.style.left) {
-				var sh = setInterval(changeTop, 15, num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
-				setTimeout(clearInterval, 1000, sh);
+
+				timesRun = 0;
+				interval = setInterval(
+					changeTop, 20, num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
+
 			} else if (nump.style.top == pic0.style.top) {
-				var sh;
-				sh = setInterval(changeLeft, 15, num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
-				setTimeout(clearInterval, 1000, sh);
+
+				timesRun = 0;
+				interval = setInterval(
+					changeLeft, 20, num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
 			}
 
 		}
 	}
 
-	// function toRigntPosition(num) {
-	// 	var _num = num.getBoundingClientRect();
-	// 	var _blank = pic0.getBoundingClientRect();
-	// 	if ((_num.left == _blank.left && Math.abs(_num.top - _blank.top) == 154) ||
-	// 		(_num.top == _blank.top && Math.abs(_num.left - _blank.left) == 154)) {
-	// 		var NUMPTop = parseFloat(document.getElementById(num.id).style.top);
-	// 		var PIC0Top = parseFloat(document.getElementById("pic0").style.top);
-	// 		var NUMPLEFT = parseFloat(document.getElementById(num.id).style.left);
-	// 		var PIC0LEFT = parseFloat(document.getElementById("pic0").style.left);
-	// 		var position = new Array(NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
-	// 		for (var i = 0; i < position.length; i++) {
-	// 			if (position[i] < 100) position[i] = 0+"px";
-	// 			else if (position[i] < 200) position[i] = 154+"px";
-	// 			else position[i] = 308+"px";
-	// 		}
-	// 		// document.getElementById(num.id).style.top = NUMPTop + "px";
-	// 		// document.getElementById("pic0").style.top = PIC0Top + "px";
-	// 		// document.getElementById(num.id).style.left = NUMPLEFT + "px";
-	// 		// document.getElementById("pic0").style.left = PIC0LEFT + "px";
-
-	// 	}
-	// }
 
 
 	//移动点击的图片与空白图片的位置
@@ -85,13 +68,17 @@ onload = function() {
 	function changeTop(num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT) {
 		var nump = document.getElementById(num.id);
 		var pic0 = document.getElementById("pic0");
-		var abs=Math.abs(parseFloat(document.getElementById(num.id).style.top)-
+		var abs = Math.abs(parseFloat(document.getElementById(num.id).style.top) -
 			parseFloat(document.getElementById(pic0.id).style.top));
 		const DISTANCE = 154 / 50;
-		if (NUMPTop > PIC0Top&&abs<154||(parseFloat(nump.style.top) -parseFloat(pic0.style.top)==154)) {
+		timesRun += 1;
+		if (timesRun === 50) {
+			clearInterval(interval);
+		}
+		if (NUMPTop > PIC0Top && abs < 154 || (parseFloat(nump.style.top) - parseFloat(pic0.style.top) == 154)) {
 			nump.style.top = (parseFloat(nump.style.top) - DISTANCE) + "px";
 			pic0.style.top = (parseFloat(pic0.style.top) + DISTANCE) + "px";
-		} else if(NUMPTop < PIC0Top&&abs<154||(parseFloat(pic0.style.top) - parseFloat(nump.style.top)==154)) {
+		} else if (NUMPTop < PIC0Top && abs < 154 || (parseFloat(pic0.style.top) - parseFloat(nump.style.top) == 154)) {
 			nump.style.top = (parseFloat(nump.style.top) + DISTANCE) + "px";
 			pic0.style.top = (parseFloat(pic0.style.top) - DISTANCE) + "px";
 		}
@@ -102,12 +89,16 @@ onload = function() {
 		var nump = document.getElementById(num.id);
 		var pic0 = document.getElementById("pic0");
 		const DISTANCE = 154 / 50;
-		var abs=Math.abs(parseFloat(document.getElementById(num.id).style.left)-
+		timesRun += 1;
+		if (timesRun === 50) {
+			clearInterval(interval);
+		}
+		var abs = Math.abs(parseFloat(document.getElementById(num.id).style.left) -
 			parseFloat(document.getElementById(pic0.id).style.left));
-		if (NUMPLEFT > PIC0LEFT&&abs<154||(parseFloat(nump.style.left) -parseFloat(pic0.style.left)==154)) {
+		if (NUMPLEFT > PIC0LEFT) {
 			nump.style.left = (parseFloat(nump.style.left) - DISTANCE) + "px";
 			pic0.style.left = (parseFloat(pic0.style.left) + DISTANCE) + "px";
-		} else if(NUMPLEFT < PIC0LEFT&&abs<154||(parseFloat(pic0.style.left) - parseFloat(nump.style.left)==154)) {
+		} else if (NUMPLEFT < PIC0LEFT) {
 			nump.style.left = (parseFloat(nump.style.left) + DISTANCE) + "px";
 			pic0.style.left = (parseFloat(pic0.style.left) - DISTANCE) + "px";
 		}
