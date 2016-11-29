@@ -19,6 +19,8 @@ onload = function() {
 		document.getElementById("pic" + j).style.left = pic_Style[j][k];
 		document.getElementById("pic" + j).style.top = pic_Style[j][k + 1];
 	}
+	document.getElementById("light").style.left = 154;
+	document.getElementById("light").style.top = 154;
 
 	//点击图片跳到judge_Position
 	for (var i = 1; i < 9; i++) {
@@ -153,6 +155,65 @@ function judge_Posibility() {
 		x.style.top = pic_Style[j][k + 1];
 		i++;
 		j++;
+
+		document.getElementById("light").style.boxShadow = "0px 0px 10px #FF0000";
 	}
+
+
+	//键盘控制
+	document.onkeydown = function(event) {
+			var e = event || window.event || arguements.callee.caller.arguements[0];
+			var light = document.getElementById("light");
+			var pic0 = document.getElementById("pic0");
+
+			if (e && e.keyCode == 37 && parseInt(light.style.left) > 0) {
+				light.style.left = (parseInt(light.style.left) - 154) + "px";
+			} else if (e && e.keyCode == 38 && parseInt(light.style.top) > 0) {
+				light.style.top = (parseInt(light.style.top) - 154) + "px";
+			} else if (e && e.keyCode == 39 && parseInt(light.style.left) < 308) {
+				light.style.left = (parseInt(light.style.left) + 154) + "px";
+			} else if (e && e.keyCode == 40 && parseInt(light.style.top) < 308) {
+				light.style.top = (parseInt(light.style.top) + 154) + "px";
+			} else if (e && e.keyCode == 13 &&
+				((light.style.left == pic0.style.left && Math.abs(parseInt(light.style.top) - parseInt(pic0.style.top)) == 154) ||
+					(light.style.top == pic0.style.top && Math.abs(parseInt(light.style.left) - parseInt(pic0.style.left)) == 154))
+			) {
+				if (judgeBlink) lightBlink();
+				for (var i = 0; i < 9; i++)
+					if ((document.getElementById("pic" + [i]).style.left == light.style.left) &&
+						(document.getElementById("pic" + [i]).style.top == light.style.top))
+						move = i;
+
+			} else if (e && e.keyCode == 13 &&
+				(light.style.left == pic0.style.left && light.style.top == pic0.style.top)
+			) {
+
+				clearInterval(lightBlin);
+
+				document.getElementById("light").style.boxShadow = "0px 0px 10px #FF0000";
+				if (!judgeBlink) {
+					var x = document.getElementById("pic" + move);
+					var y = document.getElementById("pic0");
+					var z = "";
+					z = x.style.cssText;
+					x.style.cssText = y.style.cssText;
+					y.style.cssText = z;
+				}
+
+				judgeBlink = true;
+			}
+		}
+		//闪烁效果
+	function lightBlink() {
+		var count = 0;
+		judgeBlink = false;
+		lightBlin = setInterval(function() {
+			if (count % 2 == 0) document.getElementById("light").style.boxShadow = "";
+			else document.getElementById("light").style.boxShadow = "0px 0px 10px #FF0000";
+			count++;
+		}, 300);
+	}
+
 }
-//移动效果
+var move;
+var judgeBlink = true;
