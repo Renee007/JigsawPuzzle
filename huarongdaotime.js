@@ -165,6 +165,7 @@ function judge_Posibility() {
 			var e = event || window.event || arguements.callee.caller.arguements[0];
 			var light = document.getElementById("light");
 			var pic0 = document.getElementById("pic0");
+			var moveit = document.getElementById("pic"+move);
 
 			if (e && e.keyCode == 37 && parseInt(light.style.left) > 0) {
 				light.style.left = (parseInt(light.style.left) - 154) + "px";
@@ -174,10 +175,7 @@ function judge_Posibility() {
 				light.style.left = (parseInt(light.style.left) + 154) + "px";
 			} else if (e && e.keyCode == 40 && parseInt(light.style.top) < 308) {
 				light.style.top = (parseInt(light.style.top) + 154) + "px";
-			} else if (e && e.keyCode == 13 &&
-				((light.style.left == pic0.style.left && Math.abs(parseInt(light.style.top) - parseInt(pic0.style.top)) == 154) ||
-					(light.style.top == pic0.style.top && Math.abs(parseInt(light.style.left) - parseInt(pic0.style.left)) == 154))
-			) {
+			} else if (e && e.keyCode == 13&&(!(light.style.left == pic0.style.left && light.style.top == pic0.style.top))){
 				if (judgeBlink) lightBlink();
 				for (var i = 0; i < 9; i++)
 					if ((document.getElementById("pic" + [i]).style.left == light.style.left) &&
@@ -185,7 +183,10 @@ function judge_Posibility() {
 						move = i;
 
 			} else if (e && e.keyCode == 13 &&
-				(light.style.left == pic0.style.left && light.style.top == pic0.style.top)
+				(light.style.left == pic0.style.left && light.style.top == pic0.style.top) &&
+				((moveit.style.left == pic0.style.left && Math.abs(parseInt(moveit.style.top) - parseInt(pic0.style.top)) == 154) ||
+					(moveit.style.top == pic0.style.top && Math.abs(parseInt(moveit.style.left) - parseInt(pic0.style.left)) == 154))
+
 			) {
 
 				clearInterval(lightBlin);
