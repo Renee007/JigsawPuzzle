@@ -48,13 +48,13 @@ onload = function() {
 
 				timesRun = 0;
 				interval = setInterval(
-					changeTop, 20, num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
+					changeTop, 10, num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
 
 			} else if (nump.style.top == pic0.style.top) {
 
 				timesRun = 0;
 				interval = setInterval(
-					changeLeft, 20, num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
+					changeLeft, 10, num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT);
 			}
 
 		}
@@ -70,9 +70,9 @@ onload = function() {
 		var pic0 = document.getElementById("pic0");
 		var abs = Math.abs(parseFloat(document.getElementById(num.id).style.top) -
 			parseFloat(document.getElementById(pic0.id).style.top));
-		const DISTANCE = 154 / 50;
+		const DISTANCE = 154 / 100;
 		timesRun += 1;
-		if (timesRun === 50) {
+		if (timesRun === 100) {
 			clearInterval(interval);
 		}
 		if (NUMPTop > PIC0Top && abs < 154 || (parseFloat(nump.style.top) - parseFloat(pic0.style.top) == 154)) {
@@ -88,9 +88,9 @@ onload = function() {
 	function changeLeft(num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT) {
 		var nump = document.getElementById(num.id);
 		var pic0 = document.getElementById("pic0");
-		const DISTANCE = 154 / 50;
+		const DISTANCE = 154 / 100;
 		timesRun += 1;
-		if (timesRun === 50) {
+		if (timesRun === 100) {
 			clearInterval(interval);
 		}
 		var abs = Math.abs(parseFloat(document.getElementById(num.id).style.left) -
@@ -123,15 +123,6 @@ function judge_FinalPosition() {
 	alert("success!");
 
 }
-
-
-//
-/*var ocssRules = document.styleSheets[0].rules || document.styleSheets[0].cssRules;
-var style1 = ocssRules[0];
-var style2 = ocssRules[1];
-window.alert(style1.style.left);
-window.alert(style2.style.left);*/
-
 
 
 //判断乱序后的图片时候能拼回原图
