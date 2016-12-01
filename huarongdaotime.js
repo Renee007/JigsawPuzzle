@@ -25,7 +25,7 @@ onload = function() {
 	//点击图片跳到judge_Position
 	for (var i = 1; i < 9; i++) {
 		document.getElementById("pic" + i).onclick = function(e) {
-			judge_Position(e.currentTarget);
+			judge_Position(e.currentTarget.id);
 		}
 	}
 
@@ -35,15 +35,15 @@ onload = function() {
 
 	//判断图片是否可以移动并移动
 	function judge_Position(num) {
-		var _num = num.getBoundingClientRect();
+		var _num = document.getElementById(num).getBoundingClientRect();
 		var _blank = pic0.getBoundingClientRect();
 		if ((_num.left == _blank.left && Math.abs(_num.top - _blank.top) == 154) ||
 			(_num.top == _blank.top && Math.abs(_num.left - _blank.left) == 154)) {
-			const nump = document.getElementById(num.id);
+			const nump = document.getElementById(num);
 			const pic0 = document.getElementById("pic0");
-			var NUMPTop = parseFloat(document.getElementById(num.id).style.top);
+			var NUMPTop = parseFloat(document.getElementById(num).style.top);
 			var PIC0Top = parseFloat(document.getElementById("pic0").style.top);
-			var NUMPLEFT = parseFloat(document.getElementById(num.id).style.left);
+			var NUMPLEFT = parseFloat(document.getElementById(num).style.left);
 			var PIC0LEFT = parseFloat(document.getElementById("pic0").style.left);
 
 			if (nump.style.left == pic0.style.left) {
@@ -68,10 +68,10 @@ onload = function() {
 
 
 	function changeTop(num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT) {
-		var nump = document.getElementById(num.id);
+		var nump = document.getElementById(num);
 		var pic0 = document.getElementById("pic0");
-		var abs = Math.abs(parseFloat(document.getElementById(num.id).style.top) -
-			parseFloat(document.getElementById(pic0.id).style.top));
+		var abs = Math.abs(parseFloat(nump.style.top) -
+			parseFloat(pic0.style.top));
 		const DISTANCE = 154 / 100;
 		timesRun += 1;
 		if (timesRun === 100) {
@@ -88,15 +88,15 @@ onload = function() {
 	}
 
 	function changeLeft(num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT) {
-		var nump = document.getElementById(num.id);
+		var nump = document.getElementById(num);
 		var pic0 = document.getElementById("pic0");
 		const DISTANCE = 154 / 100;
 		timesRun += 1;
 		if (timesRun === 100) {
 			clearInterval(interval);
 		}
-		var abs = Math.abs(parseFloat(document.getElementById(num.id).style.left) -
-			parseFloat(document.getElementById(pic0.id).style.left));
+		var abs = Math.abs(parseFloat(nump.style.left) -
+			parseFloat(pic0.style.left));
 		if (NUMPLEFT > PIC0LEFT) {
 			nump.style.left = (parseFloat(nump.style.left) - DISTANCE) + "px";
 			pic0.style.left = (parseFloat(pic0.style.left) + DISTANCE) + "px";
@@ -105,7 +105,7 @@ onload = function() {
 			pic0.style.left = (parseFloat(pic0.style.left) - DISTANCE) + "px";
 		}
 	}
-}
+
 
 
 //判断图片是否回到原位
@@ -158,53 +158,8 @@ function judge_Posibility() {
 
 		document.getElementById("light").style.boxShadow = "0px 0px 10px #FF0000";
 	}
+	//闪烁效果
 
-
-	//键盘控制
-	document.onkeydown = function(event) {
-			var e = event || window.event || arguements.callee.caller.arguements[0];
-			var light = document.getElementById("light");
-			var pic0 = document.getElementById("pic0");
-			var moveit = document.getElementById("pic"+move);
-
-			if (e && e.keyCode == 37 && parseInt(light.style.left) > 0) {
-				light.style.left = (parseInt(light.style.left) - 154) + "px";
-			} else if (e && e.keyCode == 38 && parseInt(light.style.top) > 0) {
-				light.style.top = (parseInt(light.style.top) - 154) + "px";
-			} else if (e && e.keyCode == 39 && parseInt(light.style.left) < 308) {
-				light.style.left = (parseInt(light.style.left) + 154) + "px";
-			} else if (e && e.keyCode == 40 && parseInt(light.style.top) < 308) {
-				light.style.top = (parseInt(light.style.top) + 154) + "px";
-			} else if (e && e.keyCode == 13&&(!(light.style.left == pic0.style.left && light.style.top == pic0.style.top))){
-				if (judgeBlink) lightBlink();
-				for (var i = 0; i < 9; i++)
-					if ((document.getElementById("pic" + [i]).style.left == light.style.left) &&
-						(document.getElementById("pic" + [i]).style.top == light.style.top))
-						move = i;
-
-			} else if (e && e.keyCode == 13 &&
-				(light.style.left == pic0.style.left && light.style.top == pic0.style.top) &&
-				((moveit.style.left == pic0.style.left && Math.abs(parseInt(moveit.style.top) - parseInt(pic0.style.top)) == 154) ||
-					(moveit.style.top == pic0.style.top && Math.abs(parseInt(moveit.style.left) - parseInt(pic0.style.left)) == 154))
-
-			) {
-
-				clearInterval(lightBlin);
-
-				document.getElementById("light").style.boxShadow = "0px 0px 10px #FF0000";
-				if (!judgeBlink) {
-					var x = document.getElementById("pic" + move);
-					var y = document.getElementById("pic0");
-					var z = "";
-					z = x.style.cssText;
-					x.style.cssText = y.style.cssText;
-					y.style.cssText = z;
-				}
-
-				judgeBlink = true;
-			}
-		}
-		//闪烁效果
 	function lightBlink() {
 		var count = 0;
 		judgeBlink = false;
@@ -214,6 +169,47 @@ function judge_Posibility() {
 			count++;
 		}, 300);
 	}
+	//键盘控制
+	document.onkeydown = function(event) {
+		var e = event || window.event || arguements.callee.caller.arguements[0];
+		var light = document.getElementById("light");
+		var pic0 = document.getElementById("pic0");
+		var moveit = document.getElementById("pic" + move);
+
+		if (e && e.keyCode == 37 && parseInt(light.style.left) > 0) {
+			light.style.left = (parseInt(light.style.left) - 154) + "px";
+		} else if (e && e.keyCode == 38 && parseInt(light.style.top) > 0) {
+			light.style.top = (parseInt(light.style.top) - 154) + "px";
+		} else if (e && e.keyCode == 39 && parseInt(light.style.left) < 308) {
+			light.style.left = (parseInt(light.style.left) + 154) + "px";
+		} else if (e && e.keyCode == 40 && parseInt(light.style.top) < 308) {
+			light.style.top = (parseInt(light.style.top) + 154) + "px";
+		} else if (e && e.keyCode == 13 && (!(light.style.left == pic0.style.left && light.style.top == pic0.style.top))) {
+			if (judgeBlink) lightBlink();
+			for (var i = 0; i < 9; i++)
+				if ((document.getElementById("pic" + [i]).style.left == light.style.left) &&
+					(document.getElementById("pic" + [i]).style.top == light.style.top))
+					move = i;
+
+		} else if (e && e.keyCode == 13 &&
+			(light.style.left == pic0.style.left && light.style.top == pic0.style.top) &&
+			((moveit.style.left == pic0.style.left && Math.abs(parseInt(moveit.style.top) - parseInt(pic0.style.top)) == 154) ||
+				(moveit.style.top == pic0.style.top && Math.abs(parseInt(moveit.style.left) - parseInt(pic0.style.left)) == 154))
+
+		) {
+
+			clearInterval(lightBlin);
+
+			document.getElementById("light").style.boxShadow = "0px 0px 10px #FF0000";
+			if (!judgeBlink) {
+				judge_Position("pic" + move);
+			}
+
+			judgeBlink = true;
+		}
+	}
+
+}
 
 }
 var move;
