@@ -9,7 +9,7 @@ var pic_Style = [
 	[0, 308],
 	[154, 308]
 ]
-$.noConflict();
+// $.noConflict();
 jQuery(document).ready(function($) {
 	$("#light").hide();
 	$("#change").click(function() {
