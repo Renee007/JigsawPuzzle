@@ -131,7 +131,8 @@ function judge_FinalPosition() {
 function judge_Posibility() {
 	var pic_Id = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8);
 
-	while (totalNum % 2 != 0 && totalNum != 0) {
+	
+	do {
 		pic_Id.sort(function(a, b) {
 			return Math.random() - .5
 		});
@@ -146,6 +147,7 @@ function judge_Posibility() {
 			}
 		}
 	}
+	while (totalNum % 2 != 0 && totalNum != 0)
 	var i = 0;
 	var j = 0;
 	var k = 0;
