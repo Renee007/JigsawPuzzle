@@ -70,17 +70,15 @@ onload = function() {
 	function changeTop(num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT) {
 		var nump = document.getElementById(num);
 		var pic0 = document.getElementById("pic0");
-		var abs = Math.abs(parseFloat(nump.style.top) -
-			parseFloat(pic0.style.top));
-		const DISTANCE = 154 / 100;
+		const DISTANCE = 154 / 10;
 		timesRun += 1;
-		if (timesRun === 100) {
+		if (timesRun == 10) {
 			clearInterval(interval);
 		}
-		if (NUMPTop > PIC0Top && abs < 154 || (parseFloat(nump.style.top) - parseFloat(pic0.style.top) == 154)) {
+		if (NUMPTop > PIC0Top) {
 			nump.style.top = (parseFloat(nump.style.top) - DISTANCE) + "px";
 			pic0.style.top = (parseFloat(pic0.style.top) + DISTANCE) + "px";
-		} else if (NUMPTop < PIC0Top && abs < 154 || (parseFloat(pic0.style.top) - parseFloat(nump.style.top) == 154)) {
+		} else if (NUMPTop < PIC0Top) {
 			nump.style.top = (parseFloat(nump.style.top) + DISTANCE) + "px";
 			pic0.style.top = (parseFloat(pic0.style.top) - DISTANCE) + "px";
 		}
@@ -90,13 +88,11 @@ onload = function() {
 	function changeLeft(num, NUMPTop, PIC0Top, NUMPLEFT, PIC0LEFT) {
 		var nump = document.getElementById(num);
 		var pic0 = document.getElementById("pic0");
-		const DISTANCE = 154 / 100;
+		const DISTANCE = 154 / 10;
 		timesRun += 1;
-		if (timesRun === 100) {
+		if (timesRun == 10) {
 			clearInterval(interval);
 		}
-		var abs = Math.abs(parseFloat(nump.style.left) -
-			parseFloat(pic0.style.left));
 		if (NUMPLEFT > PIC0LEFT) {
 			nump.style.left = (parseFloat(nump.style.left) - DISTANCE) + "px";
 			pic0.style.left = (parseFloat(pic0.style.left) + DISTANCE) + "px";
